@@ -12,7 +12,8 @@ To test a generated model use:
 svm-test [test.csv] [modeldef.json] [report.csv]
 ```
 
-# Train/Test File Format
+
+## Train/Test File Format
 
 CSV without a header
 
@@ -25,7 +26,8 @@ Example:
 1,1-2:-71,1-1:-69,1-3:-86,1-4:-88
 ```
 
-# Model File Format
+
+## Model File Format
 
 JSON
 
