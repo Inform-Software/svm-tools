@@ -13,6 +13,12 @@ svm-test [test.csv] [modeldef.json] [report.csv]
 ```
 
 
+## Installation
+
+* `libsvm` must be installed (64bit)
+* `svm-train` and `svm-predict` must be in the executable path
+
+
 ## Train/Test File Format
 
 CSV without a header
