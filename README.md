@@ -37,6 +37,7 @@ Example:
 
 JSON
 
-* `simple.mapping` stores the simple beacon mapping (Beacon-ID -> Zone Number)
+* `simple.mapping` stores the simple beacon mapping (Beacon-ID -> Zone)
 * `svm.mapping` stores the svm beacon mapping (Beacon-ID -> Feature Number)
+* `svm.zones` stores all used zones (Zone Index - 1 -> Zone)
 * `svm.model` stores the model definition
