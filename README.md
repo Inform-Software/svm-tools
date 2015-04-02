@@ -1,27 +1,26 @@
 # SVM Tools
 
-To generate a model use:
-
-```
-svm-gen [train.csv] [modeldef.json]
-```
-
-To test a generated model use:
-
-```
-svm-test [test.csv] [modeldef.json] [report.csv]
-```
-
 
 ## Installation
 
-* `libsvm` must be installed (64bit)
-* `svm-train` and `svm-predict` must be in the executable path
+* Install [libsvm`](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+* Ensure that `svm-train` and `svm-predict` are in the executable path
 
 
-## Train/Test File Format
+## CLI Usage
 
-CSV without a header
+Generate a model:
+```
+svm-gen [train.csv] [model.json]
+```
+
+Test a generated model:
+
+```
+svm-test [test.csv] [model.json] [report.csv]
+```
+
+Train/Test File Format (CSV):
 
 * First element is the zone label
 * Other elements are beacon measurements of the form BEACONID:RSSI
@@ -32,12 +31,57 @@ Example:
 1,1-2:-71,1-1:-69,1-3:-86,1-4:-88
 ```
 
+Model File Format
 
-## Model File Format
+```json
+{
+  "simple": {
+    "mapping": {
+      BEACON_ID: ZONE_ID
+    }
+  },
+  "svm": {
+    "mapping": {
+      BEACON_ID: SVM_FEATURE_ID
+    },
+    "zones": [ZONE_ID]
+    "model": SVM_MODEL_DEF
+  }
+}
+```
 
-JSON
+## Programmatic Usage
 
-* `simple.mapping` stores the simple beacon mapping (Beacon-ID -> Zone)
-* `svm.mapping` stores the svm beacon mapping (Beacon-ID -> Feature Number)
-* `svm.zones` stores all used zones (Zone Index - 1 -> Zone)
-* `svm.model` stores the model definition
+```
+var svmTools = require('svm-tools');
+
+// generate a model
+svmTools.train(data, progressCallback).then(function (model) { ... });
+
+// test a model
+svmTools.test(data, model).then(function (report) { ... });
+```
+
+Testdata Object:
+
+```json
+[{
+  "zone": ZONE_ID,
+  "data": [{
+    "date": TIMESTAMP (optional),
+    "gps": {
+      "east": GPS_EAST (optional),
+      "north": GPS_NORTH (optional),
+      "accuracy": GPS_ACCURACY (optional)
+    },
+    "beacons": [{
+      "uuid": BEACON_UUID,
+      "major": BEACON_MAJOR,
+      "minor": BEACON_MINOR,
+      "rssi": BEACON_RSSI
+    }]
+  }]
+}]
+```
+
+Model Object (see description in section CLI Usage).
