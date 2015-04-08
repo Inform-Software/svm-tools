@@ -2,7 +2,7 @@
   "name": "svm-tools",
   "version": "1.0.0",
   "description": "Tools to generate SVM Models",
-  "main": "lib/util.js",
+  "main": "svm-tools/index.js",
   "bin": {
     "svm-gen": "svm-gen.js",
     "svm-test": "svm-test.js"
