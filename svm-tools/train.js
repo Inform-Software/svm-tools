@@ -92,7 +92,6 @@ function trainSVM(dataFile, modelFile) {
   function trainParam(param, next) {
     var command = 'svm-train -q -v 5 -c ' + param.c + ' -g ' + param.g + ' ' + dataFile;
     cp.exec(command, function (err, stdout) {
-      console.log(stdout);
       var match = stdout.match(/Cross Validation Accuracy = (\d+(\.\d+)?)%/);
       if (match.length > 1) {
         param.accuracy = parseFloat(match[1]);
