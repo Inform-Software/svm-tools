@@ -90,7 +90,9 @@ function trainSVM(dataFile, modelFile) {
   var count = 0;
 
   function trainParam(param, next) {
-    cp.exec('svm-train -v 5 -c ' + param.c + ' -g ' + param.g + ' ' + dataFile, function (err, stdout) {
+    var command = 'svm-train -q -v 5 -c ' + param.c + ' -g ' + param.g + ' ' + dataFile;
+    cp.exec(command, function (err, stdout) {
+      console.log(stdout);
       var match = stdout.match(/Cross Validation Accuracy = (\d+(\.\d+)?)%/);
       if (match.length > 1) {
         param.accuracy = parseFloat(match[1]);
@@ -103,7 +105,7 @@ function trainSVM(dataFile, modelFile) {
 
   function drain() {
     var command = 'svm-train -b 1 -c ' + bestParam.c + ' -g ' + bestParam.g + ' ' + dataFile + ' ' + modelFile;
-    cp.exec(command, function (err) {
+    cp.exec(command, {maxBuffer: 1024 * 1000}, function (err) {
       if (err) return defer.reject(err);
       defer.resolve();
     });
@@ -119,6 +121,13 @@ function trainSVM(dataFile, modelFile) {
 }
 
 module.exports = function (zones, progress) {
+  // filter null beacons
+  zones.forEach(function (zone) {
+    zone.data = zone.data.filter(function (beacon) {
+      return beacon;
+    });
+  });
+
   var model = { simple: {}, svm: {} };
 
   // simple mapping
