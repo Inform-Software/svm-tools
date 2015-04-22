@@ -10,7 +10,8 @@ exports.getBeaconId = function (beacon) {
 exports.eachRecord = function (zones, callback) {
   zones.forEach(function (zone) {
     zone.data.forEach(function (record) {
-      callback(record, zone);
+      //check if record null
+      if (record) callback(record, zone);
     });
   });
 };
