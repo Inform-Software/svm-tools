@@ -34,7 +34,7 @@ function parseZoneResult(input, zonesList) {
 }
 
 function parseResults(results, zones, model) {
-  var i = 0;
+  var i = 1;
   var accuracy = {};
   results = results.toString().split('\n');
   util.eachRecord(zones, function (record, zone) {
