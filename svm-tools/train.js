@@ -9,6 +9,8 @@ var forEach = require('for-each');
 var tmp = require('tmp');
 var util = require('./util');
 
+var CP_BUFFER_SIZE = 1024 * 1024 * 8;
+
 function zoneListFromMapping(mapping) {
   var zones = [];
   forEach(mapping, function (i, zone) {
@@ -104,7 +106,7 @@ function trainSVM(dataFile, modelFile) {
 
   function drain() {
     var command = 'svm-train -b 1 -c ' + bestParam.c + ' -g ' + bestParam.g + ' ' + dataFile + ' ' + modelFile;
-    cp.exec(command, {maxBuffer: 1024 * 1000}, function (err) {
+    cp.exec(command, {maxBuffer: CP_BUFFER_SIZE}, function (err) {
       if (err) return defer.reject(err);
       defer.resolve();
     });

@@ -6,6 +6,8 @@ var q = require('q');
 var tmp = require('tmp');
 var util = require('./util');
 
+var CP_BUFFER_SIZE = 1024 * 1024 * 8;
+
 function testSimple(zones, mapping) {
   var accuracy = {};
   util.eachRecord(zones, function (record, zone) {
@@ -20,7 +22,8 @@ function testSimple(zones, mapping) {
 }
 
 function testSVM(dataFile, modelFile, resultFile) {
-  return q.nfcall(cp.exec, 'svm-predict -b 1 ' + dataFile + ' ' + modelFile + ' ' + resultFile);
+  var command = 'svm-predict -b 1 ' + dataFile + ' ' + modelFile + ' ' + resultFile;
+  return q.nfcall(cp.exec, command, {maxBuffer: CP_BUFFER_SIZE});
 }
 
 function parseZoneResult(input, zonesList) {
