@@ -59,7 +59,7 @@ exports.makeIndex = function (data) {
   return index;
 };
 
-exports.readCSV = function (file) {
+exports.readCSV = function (file, defaultUUID) {
   var defer = q.defer();
   var data = {};
 
@@ -68,7 +68,7 @@ exports.readCSV = function (file) {
     data[zone] = data[zone] || [];
     var beacons = row.splice(1).map(function (x) {
       x = x.split(':');
-      var uuid = x.length > 2 ? x.splice(0, 1)[0] : null;
+      var uuid = x.length > 2 ? x.splice(0, 1)[0] : defaultUUID;
       var beacon = x[0].split('-');
       return {
         uuid: uuid,
