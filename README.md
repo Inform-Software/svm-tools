@@ -50,7 +50,7 @@ Model File Format
       "1-1": 1,
       "1-2": 2
     },
-    "zones": ["Zone A, "Zone B"],
+    "zones": ["Zone A", "Zone B"],
     "model": "..."
   }
 }
