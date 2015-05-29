@@ -7,26 +7,27 @@ SVM Tools provide some simple node wrappers around libsvm to train and test mode
 * Install [libsvm`](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 * Ensure that `svm-train` and `svm-predict` are in the executable path
 * Install [node and npm](https://nodejs.org)
-* Install node dependencies: `npm install`
+* Install svm-tools: `npm i -g svm-tools`
 
 
 ## CLI Usage
 
 Generate a model:
 ```
-svm-gen [train.csv] [model.json]
+svm-gen [train.csv|json] [model.json]
 ```
 
 Test a generated model:
 
 ```
-svm-test [test.csv] [model.json] [report.csv]
+svm-test [test.csv|json] [model.json] [report.csv]
 ```
 
 Train/Test File Format (CSV):
 
 * First element is the zone label
 * Other elements are beacon measurements of the form BEACONID:RSSI
+* Alternatively, a JSON file using the testdata object format described below can be used as input.
 
 Example:
 
@@ -40,15 +41,17 @@ Model File Format
 {
   "simple": {
     "mapping": {
-      BEACON_ID: ZONE_ID
+      "1-1": "Zone A",
+      "1-2": "Zone B"
     }
   },
   "svm": {
     "mapping": {
-      BEACON_ID: SVM_FEATURE_ID
+      "1-1": 1,
+      "1-2": 2
     },
-    "zones": [ZONE_ID]
-    "model": SVM_MODEL_DEF
+    "zones": ["Zone A, "Zone B"],
+    "model": "..."
   }
 }
 ```
@@ -69,19 +72,19 @@ Testdata Object:
 
 ```json
 [{
-  "zone": ZONE_ID,
+  "zone": "Zone A",
   "data": [{
-    "date": TIMESTAMP (optional),
+    "date": "2012-04-23T18:25:43.511Z",
     "gps": {
-      "east": GPS_EAST (optional),
-      "north": GPS_NORTH (optional),
-      "accuracy": GPS_ACCURACY (optional)
+      "east": 4.1237372,
+      "north": 10.28288382,
+      "accuracy": 1
     },
     "beacons": [{
-      "uuid": BEACON_UUID,
-      "major": BEACON_MAJOR,
-      "minor": BEACON_MINOR,
-      "rssi": BEACON_RSSI
+      "uuid": "123e4567-e89b-12d3-a456-426655440000",
+      "major": 1,
+      "minor": 1,
+      "rssi": -87
     }]
   }]
 }]
