@@ -11,7 +11,7 @@ var svmTools = require('./svm-tools');
 
 var args = minimist(process.argv.splice(2));
 if (args._.length < 2) {
-  console.log('Usage: svm-gen [train.csv] [model.json]');
+  console.log('Usage: svm-gen [train.csv|json] [model.json]');
   process.exit(-1);
 }
 

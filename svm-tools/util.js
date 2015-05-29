@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var q = require('q');
 var csv = require('fast-csv');
 
@@ -60,6 +61,13 @@ exports.makeIndex = function (data) {
 };
 
 exports.readCSV = function (file, defaultUUID) {
+
+  // just parse json files
+  if (file.substr(-5) === '.json') {
+    return q.nfcall(fs.readFile, file)
+    .then(function (contents) { return JSON.parse(contents.toString()); });
+  }
+
   var defer = q.defer();
   var data = {};
 
