@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://usability.inform-ac.com:7990/stash/scm/m/svm-tools.git"
+    "url": "https://github.com/jdiehl/svm-tools.git"
   },
   "author": "Jonathan Diehl",
-  "license": "Copyright",
+  "license": "MIT",
   "dependencies": {
     "async": "^1.0.0",
     "fast-csv": "^0.6.0",
