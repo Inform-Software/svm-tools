@@ -5,6 +5,8 @@
 
 * Install [libsvm`](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 * Ensure that `svm-train` and `svm-predict` are in the executable path
+* Install node and npm (if you haven't already)
+* Do `npm i`
 
 
 ## CLI Usage
@@ -85,3 +87,8 @@ Testdata Object:
 ```
 
 Model Object (see description in section CLI Usage).
+
+## Conversion scripts
+
+* `convert.js` converts a legacy .csv file (from the BeaconScanner, see that repository) into one that can be used by svm-gen
+* `convertCSV.js` converts the result of convert.js into a json that can be imported into an inform-location-server (see that repository)
