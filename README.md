@@ -4,7 +4,7 @@ SVM Tools provide some simple node wrappers around libsvm to train and test mode
 
 ## Installation
 
-* Install [libsvm`](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+* Install [libsvm](http://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 * Ensure that `svm-train` and `svm-predict` are in the executable path
 * Install [node and npm](https://nodejs.org)
 * Install svm-tools: `npm i -g svm-tools`
